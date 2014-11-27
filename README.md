@@ -3,6 +3,7 @@ Simple-HTTP-Requester
 
 Simple HTTP POST Requester
 
+<pre>
 usage: post.py [-h] [--header [HEADER [HEADER ...]]] [--fheader FHEADER]
                  [--ua UA] [--ct CT] [--data DATA] [--fdata FDATA]
                  url
@@ -20,3 +21,4 @@ optional arguments:
   --data DATA           Data to be sent inside the request body
   --fdata DATA_FILE     Specify a file containing the data to be sent inside
                         the request body
+</pre>
