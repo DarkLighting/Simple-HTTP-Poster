@@ -69,7 +69,7 @@ def save_response( request_content, response_content ):
     fp_resp.close();
 
 def add_default_headers():
-    return dict({ 'Content-Type': 'text/xml; charset=utf-8', 'User-Agent': 'FuzzML/1.0' });
+    return dict({ 'Content-Type': 'text/html; charset=utf-8', 'User-Agent': 'FuzzML/1.0' });
 
 
 def add_header( header_dict, field_value_dict ):
