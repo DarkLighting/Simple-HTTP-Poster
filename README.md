@@ -1,4 +1,4 @@
-Simple-HTTP-Requester
+Simple-HTTP-Poster
 =====================
 
 <pre>
