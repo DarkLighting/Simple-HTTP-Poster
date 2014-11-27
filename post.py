@@ -5,15 +5,15 @@ import argparse
 import os.path
 from datetime import datetime
 
-parser = argparse.ArgumentParser( description='SOAP web service Fuzzer' );
-parser.add_argument( 'url', help='Web service URL to fuzz' );
+parser = argparse.ArgumentParser( description='Simple HTTP POST Requester' );
+parser.add_argument( 'url', help='URL to send the POST request' );
 parser.add_argument( '--header', nargs='*', help='Specify required request headers' );
 parser.add_argument( '--fheader', help='Specify a file containing the required request headers' );
 parser.add_argument( '--ua', help='Specify User-Agent header' );
 parser.add_argument( '--ct', help='Specify Content-Type header' );
 parser.add_argument( '--data', help='Data to be sent inside the request body' );
 parser.add_argument( '--fdata', help='Specify a file containing the data to be sent inside the request body' );
-args = parser.parse_args()
+args = parser.parse_args();
 
 #args.url = args.url.lower()  
 #url = args.url;
