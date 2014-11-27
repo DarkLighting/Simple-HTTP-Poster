@@ -1,9 +1,9 @@
 Simple-HTTP-Requester
 =====================
 
+<pre>
 Simple HTTP POST Requester
 
-<pre>
 usage: post.py [-h] [--header [HEADER [HEADER ...]]] [--fheader FHEADER]
                  [--ua UA] [--ct CT] [--data DATA] [--fdata FDATA]
                  url
