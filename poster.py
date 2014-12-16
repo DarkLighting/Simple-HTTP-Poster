@@ -7,6 +7,7 @@ from datetime import datetime
 
 parser = argparse.ArgumentParser( description='Simple HTTP POST Requester' );
 parser.add_argument( 'url', help='URL to send the POST request' );
+parser.add_argument( '--auth', nargs=2, help='Provide credential' );
 parser.add_argument( '--header', nargs='*', help='Specify required request headers' );
 parser.add_argument( '--fheader', help='Specify a file containing the required request headers' );
 parser.add_argument( '--ua', help='Specify User-Agent header' );
@@ -38,7 +39,16 @@ def verify_url( url ):
 
 
 def make_request( url, usr_headers, content='None' ):
-    http = requests.post( url, data=content, headers=usr_headers );
+    if ( args.auth is not None ):
+        http = requests.post( url, data=content, headers=usr_headers, auth=(args.auth[0], args.auth[1]) );
+        if (http.status_code == requests.codes.ok):
+            http.close();
+            return http;
+        else:
+            print('\n%s\n' % http.text);
+            end("\nHTTP Response Status Code %s - %s\n" %( http.status_code, http.reason ) );
+    else:
+        http = requests.post( url, data=content, headers=usr_headers );
     http.close();
     return http;
 
@@ -61,8 +71,8 @@ def get_address( url ):
 def save_response( request_content, response_content ):
     if not os.path.exists(path):
         os.makedirs(path);
-    fp_req = open( path + url + '_req.txt', 'w+' );     # requests/www.example.com_webservice.php_20141110_1822.15.059238_req.txt 
-    fp_resp = open( path + url + '_resp.txt', 'w+' );    # requests/www.example.com_webservice.php_20141110_1822.15.059238_resp.txt
+    fp_req = open( path + url + '_req.xml', 'w+' );     # requests/www.example.com_webservice.php_20141110_1822.15.059238_req.xml 
+    fp_resp = open( path + url + '_resp.xml', 'w+' );    # requests/www.example.com_webservice.php_20141110_1822.15.059238_resp.xml
     fp_req.write( request_content );
     fp_resp.write( response_content );
     fp_req.close();
@@ -110,9 +120,10 @@ def replace_tabs( string ):
 
 
 check_url_syntax( args.url );
-verify_url( args.url );
+#verify_url( args.url );
 url = get_address( args.url ); 
 hr = add_headers( args );
 http_resp = make_request( args.url, hr, args.data );
-#save_response( args.data, http_resp.text );
+print( '\n%s \n' %( http_resp.text ) );
+end( "HTTP Response Status Code %s - %s\n" %( http_resp.status_code, http_resp.reason ) );
 
